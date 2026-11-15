@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+
+/* Design tokens. Utilities like bg-panel / text-muted / border-line come from these. */
+@theme {
+  --color-base: #0b1220; /* page background */
+  --color-panel: #121c30; /* header, sidebar, cards */
+  --color-raised: #1a2740; /* hover and selected surfaces */
+  --color-line: #2a3a57; /* borders and dividers */
+  --color-fg: #e8eef8; /* primary text */
+  --color-muted: #9db0cc; /* secondary text, still AA on base and panel */
+  --color-signal: #52d6c8; /* brand and focus accent */
+  --color-caution: #f5b94a; /* simulated-data badge, later warnings */
+
+  --font-sans: 'IBM Plex Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-base);
+  }
+  body {
+    margin: 0;
+    background-color: var(--color-base);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* One visible focus style everywhere, for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* main is focused programmatically after navigation; no ring needed on it. */
+  main:focus {
+    outline: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
